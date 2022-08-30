@@ -1,3 +1,4 @@
+import 'package:apk_ow_guci/module/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreenPage extends StatefulWidget {
@@ -12,14 +13,29 @@ class SplashScreenPageState extends State<SplashScreenPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.home),
+        leading: const Icon(Icons.menu),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
+            icon: Icon(Icons.info),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.account_circle),
+          ),
+        ],
         centerTitle: true,
         title: const Text("Obyek Wisata Guci"),
       ),
       body: Center(
         child: Image.asset(
-          "assets/guci.jpg",
-          height: 100,
+          "assets/GUCI.png",
+          height: 200,
         ),
       ),
     );
