@@ -21,12 +21,17 @@ class _HomePageState extends State<HomePage> {
         margin: EdgeInsets.all(50),
         child: Column(
           children: [
-            FlutterLogo(
-              size: 100,
+            Image.asset(
+              "assets/guci.jpg",
+              height: 200,
             ),
-            Text('flutter classroom beginer'),
-            Text('student : Rudi Juniyanto'),
+            Text(
+              "flutter classroom beginer",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text("student : Rudi Juniyanto"),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Icon(Icons.home),
                 Icon(Icons.headset),
