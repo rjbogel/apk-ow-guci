@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                     color: Color.fromARGB(255, 19, 19, 19)),
               ),
               Text(
-                "desa guci kecamatan bumijawa kabupaten tegal",
+                "Desa guci kec.Bumijawa kab.Tegal",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
