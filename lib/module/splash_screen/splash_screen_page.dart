@@ -1,58 +1,60 @@
 import 'package:apk_ow_guci/module/home_page/home_page.dart';
+import 'package:apk_ow_guci/module/splash_screen/splash_screen_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class SplashScreenPage extends StatefulWidget {
+class SplashScreenPage extends StatelessWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
 
   @override
-  State<SplashScreenPage> createState() => SplashScreenPageState();
-}
-
-class SplashScreenPageState extends State<SplashScreenPage> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: 
-          IconButton(
-          onPressed: () {
-            
-          },
-          icon: Icon(Icons.menu),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-              );
-            },
-            icon: Icon(Icons.info),
+    return ChangeNotifierProvider(
+      create: (_) => SplashScreenNotifier(context),
+      child: Consumer<SplashScreenNotifier>(
+        builder: (context, value, child) => SafeArea(
+          child: Scaffold(
+            body: Stack(
+              children: [
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width > 600
+                        ? 300
+                        : double.infinity,
+                    child: Container(
+                      color: Color.fromARGB(255, 163, 164, 165),
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "assets/GUCI.png",
+                            height: 200,
+                          ),
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          SizedBox(
+                            height: 50,
+                            width: 50,
+                            child: Column(
+                              children: const [
+                                CircularProgressIndicator(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.account_circle),
-          ),
-        ],
-        centerTitle: true,
-        title: const Text("Obyek Wisata Guci"),
-      ),
-      body: Center(
-        child: Image.asset(
-          "assets/GUCI.png",
-          height: 200,
         ),
       ),
     );
-    // child: Text("Rudi juniyanto",
-    //     style: TextStyle(
-    //       fontStyle: FontStyle.italic,
-    //       fontSize: 60,
-    //       fontWeight: FontWeight.bold,
-    //       color: Colors.blue,
-    //       decorationStyle: TextDecorationStyle.wavy,
-    //       decorationColor: Color.fromRGBO(24, 50, 255, 1.0),
-    //     ))),
   }
 }
