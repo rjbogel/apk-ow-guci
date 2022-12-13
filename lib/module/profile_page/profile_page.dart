@@ -14,23 +14,112 @@ class ProfilePage extends StatelessWidget {
         builder: (context, myType, child) {
           return ListView(
             children: [
-              Container(
-                child: Center(
-                    child: FaIcon(
-                  FontAwesomeIcons.userLarge,
-                  size: 120,
-                )),
-                margin: EdgeInsets.only(top: 50),
-                height: 200,
-                width: 200,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Color.fromARGB(255, 147, 149, 151),
-                ),
+              Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                      color: Colors.blueGrey,
+                    ),
+                    height: 310,
+                    width: double.infinity,
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        child: Center(
+                            child: FaIcon(
+                          FontAwesomeIcons.userLarge,
+                          size: 120,
+                        )),
+                        margin: EdgeInsets.only(top: 50),
+                        height: 200,
+                        width: 200,
+                        decoration: const BoxDecoration(
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 15.0,
+                                offset: Offset(0.0, 0.75))
+                          ],
+                          shape: BoxShape.circle,
+                          color: Color.fromARGB(255, 234, 236, 238),
+                        ),
+                      ),
+                      Text(
+                        "Nama pengguna ",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      sosialmedia()
+                    ],
+                  )
+                ],
               ),
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class sosialmedia extends StatelessWidget {
+  const sosialmedia({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(vertical: 7),
+      decoration: BoxDecoration(
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: Colors.black54,
+              blurRadius: 15.0,
+              offset: Offset(0.0, 0.75))
+        ],
+        color: Color.fromARGB(255, 112, 157, 233),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Column(
+            children: [
+              FaIcon(
+                FontAwesomeIcons.facebookMessenger,
+              ),
+              Text("Rudi juniyanto")
+            ],
+          ),
+          Column(
+            children: [
+              FaIcon(
+                FontAwesomeIcons.squareInstagram,
+              ),
+              Text("Rudi juniyanto")
+            ],
+          ),
+          Column(
+            children: [
+              FaIcon(
+                FontAwesomeIcons.envelopeCircleCheck,
+              ),
+              Text("rudi juniyanto")
+            ],
+          ),
+        ],
       ),
     );
   }

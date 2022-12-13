@@ -21,7 +21,8 @@ class MenuPage extends StatelessWidget {
         builder: (context, value, child) {
           return Scaffold(
             key: value.keyScaffold,
-            body: Stack(
+            body: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Center(
                   child: SizedBox(
@@ -45,7 +46,7 @@ class MenuPage extends StatelessWidget {
                                                 ? HotelPage()
                                                 : SizedBox(),
                             color: value.menu == 0
-                                ? Colors.white
+                                ? Color.fromARGB(255, 255, 255, 255)
                                 : value.menu == 1
                                     ? Colors.blue
                                     : value.menu == 2
@@ -56,42 +57,57 @@ class MenuPage extends StatelessWidget {
                             // Color.fromARGB(255, 147, 198, 240)
                           ),
                         ),
-                        SizedBox(
-                          height: 60,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              MenuButton(
-                                value: value,
-                                icon: FontAwesomeIcons.userLarge,
-                                text: "Profil",
-                                pindah: 0,
-                              ),
-                              MenuButton(
-                                value: value,
-                                icon: FontAwesomeIcons.locationDot,
-                                text: "Wisata",
-                                pindah: 1,
-                              ),
-                              MenuButton(
-                                value: value,
-                                icon: FontAwesomeIcons.house,
-                                text: "Beranda",
-                                pindah: 2,
-                              ),
-                              MenuButton(
-                                value: value,
-                                icon: FontAwesomeIcons.bowlFood,
-                                text: "Makanan",
-                                pindah: 3,
-                              ),
-                              MenuButton(
-                                value: value,
-                                icon: FontAwesomeIcons.hotel,
-                                text: "Hotel",
-                                pindah: 4,
-                              ),
+                        Container(
+                          decoration: BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                  color: Colors.black54,
+                                  blurRadius: 5.0,
+                                  offset: Offset(0.0, 0.75))
                             ],
+                            color: Color.fromARGB(255, 213, 214, 214),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(7),
+                              topRight: Radius.circular(7),
+                            ),
+                          ),
+                          child: SizedBox(
+                            height: 60,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                MenuButton(
+                                  value: value,
+                                  icon: FontAwesomeIcons.userLarge,
+                                  text: "Profil",
+                                  pindah: 0,
+                                ),
+                                MenuButton(
+                                  value: value,
+                                  icon: FontAwesomeIcons.locationDot,
+                                  text: "Wisata",
+                                  pindah: 1,
+                                ),
+                                MenuButton(
+                                  value: value,
+                                  icon: FontAwesomeIcons.house,
+                                  text: "Beranda",
+                                  pindah: 2,
+                                ),
+                                MenuButton(
+                                  value: value,
+                                  icon: FontAwesomeIcons.bowlFood,
+                                  text: "Makanan",
+                                  pindah: 3,
+                                ),
+                                MenuButton(
+                                  value: value,
+                                  icon: FontAwesomeIcons.hotel,
+                                  text: "Hotel",
+                                  pindah: 4,
+                                ),
+                              ],
+                            ),
                           ),
                         )
                       ],
