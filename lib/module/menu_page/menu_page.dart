@@ -8,7 +8,12 @@ import 'package:apk_ow_guci/module/destination_page/destination_page.dart';
 import 'package:apk_ow_guci/module/home_page/home_page.dart';
 import 'package:apk_ow_guci/module/food_page/food_page.dart';
 import 'package:apk_ow_guci/module/hotel_page/hotel_page.dart';
+import 'package:apk_ow_guci/module/login_page/login_page.dart';
+import 'package:apk_ow_guci/module/dashboard_page/dashboard_page.dart';
 import 'package:apk_ow_guci/utils/mouse_detector_item.dart';
+import 'package:apk_ow_guci/utils/dialog_custom.dart';
+import 'package:apk_ow_guci/module/dashboardmenu_page/dashboardmenu_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -34,9 +39,11 @@ class MenuPage extends StatelessWidget {
                         Expanded(
                           child: Container(
                             width: double.infinity,
-                            child: value.menu == 0
-                                ? ProfilePage()
-                                : value.menu == 1
+                            child:
+                                //  value.menu == 0
+                                //     ? ProfilePage()
+                                //     :
+                                value.menu == 1
                                     ? DestinationPage()
                                     : value.menu == 2
                                         ? HomePage()
@@ -44,16 +51,22 @@ class MenuPage extends StatelessWidget {
                                             ? FoodPage()
                                             : value.menu == 4
                                                 ? HotelPage()
-                                                : SizedBox(),
-                            color: value.menu == 0
-                                ? Color.fromARGB(255, 255, 255, 255)
-                                : value.menu == 1
-                                    ? Colors.blue
-                                    : value.menu == 2
-                                        ? Colors.blueAccent
-                                        : value.menu == 3
-                                            ? Colors.orange
-                                            : Colors.red,
+                                                : value.menu == 6
+                                                    ? DashboardmenuPage(
+                                                        mainNotifier: value)
+                                                    : LoginPage(
+                                                        mainNotifier: value),
+                            // color:
+                            //     // value.menu == 0
+                            //     //     ? Color.fromARGB(255, 255, 255, 255)
+                            //     //     :
+                            //     value.menu == 1
+                            //         ? Colors.white
+                            //         : value.menu == 2
+                            //             ? Colors.blueAccent
+                            //             : value.menu == 3
+                            //                 ? Colors.orange
+                            //                 : Colors.red,
                             // Color.fromARGB(255, 147, 198, 240)
                           ),
                         ),
@@ -72,15 +85,31 @@ class MenuPage extends StatelessWidget {
                             ),
                           ),
                           child: SizedBox(
-                            height: 60,
+                            height: 50,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
+                                // MenuButton(
+                                //   value: value,
+                                //   icon: FontAwesomeIcons.userLarge,
+                                //   text: "Profil",
+                                //   pindah: 0,
+                                // ),
+
                                 MenuButton(
                                   value: value,
                                   icon: FontAwesomeIcons.userLarge,
-                                  text: "Profil",
-                                  pindah: 0,
+                                  text: value.loggedIn == null
+                                      ? "Login"
+                                      : "Dashboard",
+                                  action: () {
+                                    if (value.loggedIn == null) {
+                                      value.gantiMenu(10);
+                                    } else {
+                                      value.gantiMenu(6);
+                                    }
+                                  },
+                                  pindah: value.menu == 6 ? 6 : 10,
                                 ),
                                 MenuButton(
                                   value: value,

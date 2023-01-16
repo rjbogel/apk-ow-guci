@@ -12,7 +12,7 @@ import in_app_review
 import location
 import package_info
 import path_provider_macos
-import shared_preferences_macos
+import shared_preferences_foundation
 import sqflite
 import url_launcher_macos
 

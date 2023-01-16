@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:apk_ow_guci/module/profile_page/profile_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:apk_ow_guci/utils/mouse_detector_item.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
@@ -83,11 +83,19 @@ class sosialmedia extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.symmetric(vertical: 7),
       decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: <Color>[
+            Color(0xFF0D47A1),
+            Color(0xFF1976D2),
+            Color(0xFF42A5F5),
+          ],
+        ),
         boxShadow: <BoxShadow>[
           BoxShadow(
-              color: Colors.black54,
-              blurRadius: 15.0,
-              offset: Offset(0.0, 0.75))
+            color: Colors.black54,
+            blurRadius: 15.0,
+            offset: Offset(0.0, 0.75),
+          ),
         ],
         color: Color.fromARGB(255, 112, 157, 233),
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -100,7 +108,10 @@ class sosialmedia extends StatelessWidget {
               FaIcon(
                 FontAwesomeIcons.facebookMessenger,
               ),
-              Text("Rudi juniyanto")
+              Text(
+                "Rudi juniyanto",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
             ],
           ),
           Column(
@@ -108,7 +119,10 @@ class sosialmedia extends StatelessWidget {
               FaIcon(
                 FontAwesomeIcons.squareInstagram,
               ),
-              Text("Rudi juniyanto")
+              Text(
+                "Rudi juniyanto",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
             ],
           ),
           Column(
@@ -116,7 +130,10 @@ class sosialmedia extends StatelessWidget {
               FaIcon(
                 FontAwesomeIcons.envelopeCircleCheck,
               ),
-              Text("rudi juniyanto")
+              Text(
+                "rudi juniyanto",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              )
             ],
           ),
         ],

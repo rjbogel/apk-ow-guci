@@ -29,14 +29,14 @@ class SplashScreenPage extends StatelessWidget {
                         children: [
                           Image.asset(
                             "assets/GUCI.png",
-                            height: 200,
+                            height: 300,
                           ),
                           const SizedBox(
                             height: 16,
                           ),
                           SizedBox(
-                            height: 50,
-                            width: 50,
+                            height: 70,
+                            width: 70,
                             child: Column(
                               children: const [
                                 CircularProgressIndicator(

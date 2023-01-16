@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
                     Stack(
                       children: [
                         Image.asset(
-                          "assets/gerbang.jpg",
+                          "assets/desa.jpg",
                           fit: BoxFit.fill,
                           height: 250,
                         ),
@@ -31,59 +31,55 @@ class HomePage extends StatelessWidget {
                           left: 0,
                           right: 0,
                           child: Container(
+                            padding: EdgeInsets.all(5),
                             decoration: BoxDecoration(
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                    color: Colors.black54,
+                                    blurRadius: 15.0,
+                                    offset: Offset(0.0, 0.0))
+                              ],
                               color: Colors.white.withOpacity(0.5),
                               borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 topRight: Radius.circular(10),
                               ),
                             ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                      color: Colors.black54,
-                                      blurRadius: 15.0,
-                                      offset: Offset(0.0, 0.0))
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: const [
-                                      Text(
-                                        "Obyek wisata GUCI",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      "Obyek wisata GUCI",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
                                       ),
-                                      Text(
-                                        "Mbetahi lan ngangeni",
-                                        style: TextStyle(
+                                    ),
+                                    Text(
+                                      "Mbetahi lan ngangeni",
+                                      style: TextStyle(
                                           fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                        "(4.345 views)",
-                                        style: TextStyle(
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      "(4.345 views)",
+                                      style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
                         ),
