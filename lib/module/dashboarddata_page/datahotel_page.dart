@@ -25,6 +25,7 @@ class DataHotelPage extends StatelessWidget {
                   child: Center(
                     child: value.isFormShow
                         ? Form(
+                            key: value.formKey,
                             child: Column(
                               children: [
                                 SizedBox(
@@ -126,6 +127,13 @@ class DataHotelPage extends StatelessWidget {
                                             ),
                                             color: Colors.white),
                                         child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Nama Hotel tidak boleh kosong';
+                                            }
+                                            return null;
+                                          },
                                           initialValue: value.nama,
                                           decoration: InputDecoration(
                                               border: InputBorder.none,
@@ -166,6 +174,13 @@ class DataHotelPage extends StatelessWidget {
                                             ),
                                             color: Colors.white),
                                         child: TextFormField(
+                                          validator: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return 'Tarif Hotel tidak boleh kosong';
+                                            }
+                                            return null;
+                                          },
                                           initialValue: value.harga?.toString(),
                                           keyboardType: TextInputType.number,
                                           decoration: InputDecoration(
@@ -186,11 +201,15 @@ class DataHotelPage extends StatelessWidget {
                                       onPressed: () {
                                         if (value.formKey.currentState!
                                             .validate()) {
+                                          value.formKey.currentState!.save();
+                                          value.save('hotel');
+
                                           ScaffoldMessenger.of(value.context)
                                               .showSnackBar(
                                             SnackBar(
-                                                content: Text(
-                                                    'Processing Data.....')),
+                                              content:
+                                                  Text('Processing Data.....'),
+                                            ),
                                           );
                                         }
                                       },
@@ -257,7 +276,7 @@ class DataHotelPage extends StatelessWidget {
                         ),
                       ),
                     ],
-                    source: MyDataSourceHotel(
+                    source: MyDataSource(
                       notifier: value,
                       model: value.listHotel,
                     ),

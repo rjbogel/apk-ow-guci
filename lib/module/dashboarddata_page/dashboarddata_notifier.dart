@@ -1,5 +1,6 @@
 import 'package:apk_ow_guci/models/index.dart';
 import 'package:apk_ow_guci/module/dashboarddata_page/dashboarddata_widget.dart';
+import 'package:apk_ow_guci/repository/data_repository.dart';
 import 'package:apk_ow_guci/repository/hotel_repository.dart';
 import 'package:apk_ow_guci/repository/makanan_repository.dart';
 import 'package:apk_ow_guci/repository/wisata_repository.dart';
@@ -7,6 +8,7 @@ import 'package:apk_ow_guci/utils/dialog_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardDataNotifier extends ChangeNotifier {
   BuildContext context;
@@ -23,8 +25,17 @@ class DashboardDataNotifier extends ChangeNotifier {
 
   bool isFormShow = false;
 
+  late SharedPreferences prefs;
+  late String token;
+
   DashboardDataNotifier(this.context) {
     getData();
+  }
+
+  Future<String> getToken() async {
+    prefs = await SharedPreferences.getInstance();
+    token = prefs.getString('token') ?? '';
+    return token;
   }
 
   void resetData() {
@@ -148,5 +159,40 @@ class DashboardDataNotifier extends ChangeNotifier {
     isFormShow = false;
     resetData();
     notifyListeners();
+  }
+
+  Future save(String endpoint) async {
+    var token = await getToken();
+    DataRepository.save(
+      endpoint,
+      token: token,
+      id: id,
+      nama: nama,
+      harga: harga,
+      gambar: image,
+    ).then((value) async {
+      print("Berhasil : $value");
+      getData();
+      Navigator.pop(dialogContext);
+      CustomDialog.messageResponse(context, value['message']);
+    }).onError((error, stackTrace) {
+      print("Gagal : $error");
+      CustomDialog.messageResponse(context, error.toString());
+    }).whenComplete(() => notifyListeners());
+  }
+
+  Future hapus({
+    required String endpoint,
+    required int id,
+  }) async {
+    var token = await getToken();
+    DataRepository.delete(endpoint, id: id, token: token).then((value) async {
+      print("Berhasil : $value");
+      getData();
+      CustomDialog.messageResponse(context, value['message']);
+    }).onError((error, stackTrace) {
+      print("Gagal : $error");
+      CustomDialog.messageResponse(context, error.toString());
+    }).whenComplete(() => notifyListeners());
   }
 }
