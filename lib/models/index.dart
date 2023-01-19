@@ -1,4 +1,8 @@
 export 'auth_model.dart';
+export 'hotel_model.dart';
+export 'infografis_model.dart';
+export 'makanan_model.dart';
+export 'wisata_model.dart';
 import 'package:quiver/core.dart';
 
 T? checkOptional<T>(Optional<T?>? optional, T? Function()? def) {

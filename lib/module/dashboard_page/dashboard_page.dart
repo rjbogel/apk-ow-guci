@@ -17,15 +17,15 @@ class DashboardPage extends StatelessWidget {
             children: [
               Infografis(
                   judul: "Data jumlah Wisata",
-                  angka: "003",
+                  angka: value.infografis?.wisata.toString() ?? "0",
                   warna: Color.fromARGB(255, 64, 204, 240)),
               Infografis(
                   judul: "Data jumlah Hotel",
-                  angka: "003",
+                  angka: value.infografis?.hotel.toString() ?? "0",
                   warna: Color.fromARGB(255, 77, 126, 233)),
               Infografis(
                   judul: "Data jumlah Makanan",
-                  angka: "003",
+                  angka: value.infografis?.makanan.toString() ?? "0",
                   warna: Color.fromARGB(255, 29, 72, 167)),
             ],
           );
