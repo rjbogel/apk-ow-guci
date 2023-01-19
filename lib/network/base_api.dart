@@ -18,4 +18,8 @@ class BaseApi {
   String getAuthUrl() {
     return '${_getAuthHost()}jwt/';
   }
+
+  String getFileUrl() {
+    return '${_getAuthHost()}files/image/guci/';
+  }
 }
