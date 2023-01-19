@@ -91,7 +91,7 @@ class FormInput extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text("Input HTM"),
+                Text("Input Harga"),
                 Container(
                   height: 40,
                   padding: EdgeInsets.only(left: 10),
