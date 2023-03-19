@@ -1,5 +1,7 @@
 import 'package:apk_ow_guci/module/destination_page/destination_notifier.dart';
+import 'package:apk_ow_guci/network/base_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
 class DestinationPage extends StatelessWidget {
@@ -100,132 +102,82 @@ class DestinationPage extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Colors.black54,
-                              blurRadius: 5.0,
-                              offset: Offset(0.0, 0.75),
-                            )
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          color: Color.fromARGB(255, 247, 246, 246)),
-                      width: 130,
+              SizedBox(
+                height: 210,
+                child: ListView.builder(
+                  itemCount: value.listWisata.length,
+                  physics: ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Container(
+                    child: Card(
                       child: Container(
-                        margin: EdgeInsets.all(5),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 140,
-                              width: 120,
-                              child: Image.asset(
-                                "assets/pancuran13.jpg",
-                                fit: BoxFit.cover,
-                              ),
+                        decoration: BoxDecoration(
+                            boxShadow: <BoxShadow>[
+                              BoxShadow(
+                                color: Colors.black54,
+                                blurRadius: 5.0,
+                                offset: Offset(0.0, 0.75),
+                              )
+                            ],
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
                             ),
-                            Container(
-                              width: 120,
-                              margin: EdgeInsets.only(top: 0),
-                              padding: EdgeInsets.all(7),
-                              decoration: BoxDecoration(
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                    color: Colors.black54,
-                                    blurRadius: 5.0,
-                                    offset: Offset(0.0, 0.75),
-                                  )
-                                ],
-                                color: Colors.white.withOpacity(0.75),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
+                            color: Color.fromARGB(255, 247, 246, 246)),
+                        width: 130,
+                        child: Container(
+                          margin: EdgeInsets.all(5),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 140,
+                                width: 120,
+                                child: Image.network(
+                                  BaseApi().getFileUrl() +
+                                      "wisata/" +
+                                      value.listWisata[index].gambar,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
-                              child: Column(children: [
-                                Text(
-                                  "Pancuran 13",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "Rp.15.000/orang",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ]),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                              color: Colors.black54,
-                              blurRadius: 5.0,
-                              offset: Offset(0.0, 0.75),
-                            )
-                          ],
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                          color: Color.fromARGB(255, 247, 246, 246)),
-                      width: 130,
-                      child: Container(
-                        margin: EdgeInsets.all(5),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 140,
-                              width: 120,
-                              child: Image.asset(
-                                "assets/baron.jpg",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Container(
-                              width: 120,
-                              padding: EdgeInsets.all(7),
-                              decoration: BoxDecoration(
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
+                              Container(
+                                width: 120,
+                                margin: EdgeInsets.only(top: 0),
+                                padding: EdgeInsets.all(7),
+                                decoration: BoxDecoration(
+                                  boxShadow: <BoxShadow>[
+                                    BoxShadow(
                                       color: Colors.black54,
                                       blurRadius: 5.0,
-                                      offset: Offset(0.0, 0.75))
-                                ],
-                                color: Colors.white.withOpacity(0.75),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                              ),
-                              child: Column(children: [
-                                Text(
-                                  "Baron Hill",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
+                                      offset: Offset(0.0, 0.75),
+                                    )
+                                  ],
+                                  color: Colors.white.withOpacity(0.75),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(10),
+                                  ),
                                 ),
-                                Text(
-                                  "Rp.20.000/orang",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ]),
-                            )
-                          ],
+                                child: Column(children: [
+                                  Text(
+                                    value.listWisata[index].nama,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    value.rupiah
+                                        .format(value.listWisata[index].harga),
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ]),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],

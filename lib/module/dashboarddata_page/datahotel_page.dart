@@ -17,6 +17,7 @@ class DataHotelPage extends StatelessWidget {
       create: (_) => DashboardDataNotifier(context),
       child: Consumer<DashboardDataNotifier>(
         builder: (context, value, child) {
+          value.urlGambar = "hotel";
           return ListView(
             children: [
               Expanded(
@@ -24,208 +25,14 @@ class DataHotelPage extends StatelessWidget {
                   padding: EdgeInsets.all(25),
                   child: Center(
                     child: value.isFormShow
-                        ? Form(
-                            key: value.formKey,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  width: 270,
-                                  padding: EdgeInsets.symmetric(vertical: 7),
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color: Colors.black54,
-                                          blurRadius: 15.0,
-                                          offset: Offset(0.0, 0.75))
-                                    ],
-                                    color: Colors.blueAccent.withOpacity(0.9),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text("Input gambar Hotel"),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      value.image != null
-                                          ? Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                child: kIsWeb
-                                                    ? Image.network(
-                                                        value.image!.path,
-                                                        fit: BoxFit.cover,
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                      )
-                                                    : Image.file(
-                                                        File(value.image!.path),
-                                                        fit: BoxFit.cover,
-                                                        width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width,
-                                                      ),
-                                              ),
-                                            )
-                                          : value.gambar != null
-                                              ? Image.network(
-                                                  BaseApi().getFileUrl() +
-                                                      "hotel/" +
-                                                      value.gambar!)
-                                              : FaIcon(FontAwesomeIcons.image),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          value.myAlert();
-                                        },
-                                        child: Text('Upload Gambar'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  width: 270,
-                                  padding: EdgeInsets.symmetric(vertical: 7),
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color: Colors.black54,
-                                          blurRadius: 15.0,
-                                          offset: Offset(0.0, 0.75))
-                                    ],
-                                    color: Colors.blueAccent.withOpacity(0.9),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text("Input nama hotel"),
-                                      Container(
-                                        height: 40,
-                                        padding: EdgeInsets.only(left: 10),
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(20),
-                                            ),
-                                            color: Colors.white),
-                                        child: TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Nama Hotel tidak boleh kosong';
-                                            }
-                                            return null;
-                                          },
-                                          initialValue: value.nama,
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Masukan nama hotel"),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Container(
-                                  width: 270,
-                                  padding: EdgeInsets.symmetric(vertical: 7),
-                                  decoration: BoxDecoration(
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color: Colors.black54,
-                                          blurRadius: 15.0,
-                                          offset: Offset(0.0, 0.75))
-                                    ],
-                                    color: Colors.blueAccent.withOpacity(0.9),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(10)),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Text("Input Tarif Hotel"),
-                                      Container(
-                                        height: 40,
-                                        padding: EdgeInsets.only(left: 10),
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 20, vertical: 10),
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(20),
-                                            ),
-                                            color: Colors.white),
-                                        child: TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Tarif Hotel tidak boleh kosong';
-                                            }
-                                            return null;
-                                          },
-                                          initialValue: value.harga?.toString(),
-                                          keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
-                                              border: InputBorder.none,
-                                              hintText: "Masukan Tarif Hotel"),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        if (value.formKey.currentState!
-                                            .validate()) {
-                                          value.formKey.currentState!.save();
-                                          value.save('hotel');
-
-                                          ScaffoldMessenger.of(value.context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content:
-                                                  Text('Processing Data.....'),
-                                            ),
-                                          );
-                                        }
-                                      },
-                                      child: Text('Simpan'),
-                                    ),
-                                    SizedBox(width: 10),
-                                    ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          primary: Colors.red),
-                                      onPressed: () => value.destroyForm(),
-                                      child: Text('Batal'),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                        ? formData(
+                            context: context,
+                            notifier: value,
+                            urlGambar: value.urlGambar!,
+                            urlApi: "hotel",
+                            labelGambar: "Gambar Hotel",
+                            labelNama: "Nama Hotel",
+                            labelHarga: "Harga Hotel",
                           )
                         : ElevatedButton(
                             style:

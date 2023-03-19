@@ -1,27 +1,31 @@
 import 'package:apk_ow_guci/models/index.dart';
 import 'package:apk_ow_guci/module/dashboarddata_page/dashboarddata_widget.dart';
+import 'package:apk_ow_guci/network/base_api.dart';
 import 'package:apk_ow_guci/repository/data_repository.dart';
 import 'package:apk_ow_guci/repository/hotel_repository.dart';
 import 'package:apk_ow_guci/repository/makanan_repository.dart';
 import 'package:apk_ow_guci/repository/wisata_repository.dart';
 import 'package:apk_ow_guci/utils/dialog_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardDataNotifier extends ChangeNotifier {
   BuildContext context;
-  late BuildContext dialogContext;
   bool isLoading = true;
   XFile? image;
   late ImagePicker picker = ImagePicker();
   final formKey = GlobalKey<FormState>();
+  final TextEditingController ctlNama = TextEditingController();
+  final TextEditingController ctlHarga = TextEditingController();
 
   int? id;
   String? nama;
   int? harga;
   String? gambar;
+  String? urlGambar;
 
   bool isFormShow = false;
 
@@ -44,6 +48,8 @@ class DashboardDataNotifier extends ChangeNotifier {
     harga = null;
     gambar = null;
     image = null;
+    ctlNama.clear();
+    ctlHarga.clear();
     notifyListeners();
   }
 
@@ -145,13 +151,17 @@ class DashboardDataNotifier extends ChangeNotifier {
     );
   }
 
-  void openForm({dynamic data}) {
+  void openForm({dynamic data}) async {
     isFormShow = true;
     resetData();
-    id = data.id;
-    nama = data.nama;
-    harga = data.harga;
-    gambar = data.gambar;
+    if (data != null) {
+      id = data.id;
+      nama = data.nama;
+      harga = data.harga;
+      gambar = data.gambar;
+      ctlNama.text = nama!;
+      ctlHarga.text = harga!.toString();
+    }
     notifyListeners();
   }
 
@@ -173,7 +183,6 @@ class DashboardDataNotifier extends ChangeNotifier {
     ).then((value) async {
       print("Berhasil : $value");
       getData();
-      Navigator.pop(dialogContext);
       CustomDialog.messageResponse(context, value['message']);
     }).onError((error, stackTrace) {
       print("Gagal : $error");

@@ -1,8 +1,9 @@
-import 'dart:convert';
+import 'dart:io';
 
 import 'package:apk_ow_guci/network/base_api.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 
 class DataRepository {
@@ -28,10 +29,17 @@ class DataRepository {
     int? harga,
     XFile? gambar,
   }) async {
-    var formData = {
+    final formData = FormData.fromMap({
       'nama': nama,
       'harga': harga,
-    };
+      "gambar": gambar != null
+          ? MultipartFile.fromBytes(
+              await gambar.readAsBytes(),
+              filename: gambar.name,
+              contentType: MediaType("image", "jpeg"), //important
+            )
+          : null,
+    });
 
     Dio dio = Dio();
     dio.options.baseUrl = BaseApi().getRestUrl();

@@ -1,6 +1,6 @@
 class BaseApi {
   String _getApiHost() {
-    return 'https://frost.skom.id/';
+    return 'http://api.project/';
   }
 
   String _getAuthHost() {
