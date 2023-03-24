@@ -55,7 +55,8 @@ class MyDataSource extends DataTableSource {
                       desc: 'Apakah anda yakin ingin menghapus data ini?',
                       width: 500,
                       btnCancelOnPress: () {},
-                      btnOkOnPress: () {},
+                      btnOkOnPress: () => notifier.hapus(
+                          endpoint: notifier.urlGambar!, id: model[index].id),
                     ).show();
                   },
                   child: Text('Hapus')),
